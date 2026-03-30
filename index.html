@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Day 💖</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
+
+.container {
+    padding: 30px;
+}
+
+h1 {
+    font-size: 3em;
+}
+
+/* พิมพ์ทีละตัว */
+#text {
+    font-size: 1.3em;
+    max-width: 500px;
+    margin: 20px auto;
+    min-height: 80px;
+}
+
+/* สไลด์รูป */
+.slider {
+    width: 260px;
+    height: 260px;
+    margin: 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+
+.slider img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ปุ่ม */
+button {
+    padding: 15px 25px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #ff4b5c;
+    font-size: 1.1em;
+    cursor: pointer;
+}
+
+/* หัวใจลอย */
+.heart {
+    position: fixed;
+    color: red;
+    font-size: 20px;
+    animation: floatUp 4s linear infinite;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-800px);
+        opacity: 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🎵 เพลง -->
+<audio id="music" loop>
+    <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>Happy Birthday / Valentine 💖</h1>
+
+    <!-- 💬 ข้อความพิมพ์ -->
+    <div id="text"></div>
+
+    <!-- 📷 สไลด์รูป -->
+    <div class="slider">
+        <img id="slide" src="img1.jpg">
+    </div>
+
+    <button onclick="startAll()">กดเพื่อเริ่ม 🎉</button>
+</div>
+
+<script>
+/* 💬 พิมพ์ทีละตัว */
+const message = "ขอให้วันนี้เต็มไปด้วยความสุข 💕 รอยยิ้ม และความรักนะ 🎂✨";
+let i = 0;
+
+function typeWriter() {
+    if (i < message.length) {
+        document.getElementById("text").innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeWriter, 50);
+    }
+}
+
+/* 📷 สไลด์รูป */
+const images = ["img1.jpg","img2.jpg","img3.jpg"];
+let index = 0;
+
+function slideShow() {
+    index++;
+    if (index >= images.length) index = 0;
+    document.getElementById("slide").src = images[index];
+}
+
+/* ❤️ หัวใจลอย */
+function createHeart() {
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 4000);
+}
+
+/* ▶️ เริ่มทุกอย่าง */
+function startAll() {
+    document.getElementById("music").play();
+    typeWriter();
+    setInterval(slideShow, 2000);
+    setInterval(createHeart, 300);
+}
+</script>
+
+</body>
+</html>
